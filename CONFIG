@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+# put API keys
+
+lastFm = {
+        apiKey = 'your-api-key',
+        secret = 'your-api-secret'
+        }
+
+
+echonest = {
+        apiKey = 'your-api-key',
+        consumerKey = 'your-consumer-key',
+        sharedSecret = 'your-shared-secret'
+        }
+
