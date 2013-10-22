@@ -1,0 +1,3 @@
+[submodule "itunes"]
+	path = itunes
+	url = https://github.com/recursify/python-itunes-library.git
