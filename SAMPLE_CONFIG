@@ -3,14 +3,14 @@
 # put API keys
 
 lastFm = {
-        apiKey = 'your-api-key',
-        secret = 'your-api-secret'
+        "apiKey": 'your-api-key',
+        "secret": 'your-api-secret'
         }
 
 
 echonest = {
-        apiKey = 'your-api-key',
-        consumerKey = 'your-consumer-key',
-        sharedSecret = 'your-shared-secret'
+        "apiKey": 'your-api-key',
+        "consumerKey": 'your-consumer-key',
+        "sharedSecret": 'your-shared-secret'
         }
 

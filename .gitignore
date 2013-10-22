@@ -37,3 +37,6 @@ nosetests.xml
 
 # API Keys
 CONFIG
+
+# virtual env
+ENV/
