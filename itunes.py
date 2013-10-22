@@ -5,10 +5,9 @@ from pprint import pprint
 
 filename = 'data/library.xml'
 
-l = Library(filename)
-
 def lib_parse(filename):
     """Takes an iTunes library xml file and converts it to a list of song dicts."""
+    l = Library(filename)
     songs = []
 
     for id,song in l.songs.items():
@@ -42,5 +41,5 @@ def lib_parse(filename):
                 )
     return songs
 
-# pprint(songs)
-
+if __name__ == '__main__':
+    songs = lib_parse(filename)
