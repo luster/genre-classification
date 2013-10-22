@@ -1,0 +1,3 @@
+[submodule "pyitunes"]
+	path = pyitunes
+	url = git://github.com/liamks/pyitunes.git
