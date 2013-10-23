@@ -18,7 +18,9 @@ def get_tracks_by_artist(artist, db_table):
 
     return db_table.find({"artist": artist.lower()})
 
-def get_raw_audio(song):
-    """Get raw audio in mp3 or wav format from song input"""
+def get_track(title, artist, db_table):
+    """Get track based on title and artist from specified mongo table"""
 
-    return 0
+    return db_table.find_one({"title": title, "artist": artist})
+
+
