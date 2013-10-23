@@ -5,6 +5,7 @@ Quick Script Which Retrieves Data From Echonest for Use in the Machine Learning 
 
 from pyechonest import config, playlist
 from CONFIG import echonest, algorithm
+from pydub import AudioSegment
 import hashlib
 import urllib
 import logging
@@ -32,7 +33,8 @@ def download_song(genre, song):
         preview_url = tracks[0].get('preview_url')
         logger.debug('Preview URL for Song %s: %s' % (song, preview_url))
 
-        filename = song.artist_name + '-' + song.title + '.mp3'
+        # Save under .wav since mp3 will be converted later
+        filename = song.artist_name + '-' + song.title + '.wav'
         filename = filename.replace(' ', '_')
         # Hash filename for directory structure
         md5 = hashlib.md5()
@@ -54,6 +56,10 @@ def download_song(genre, song):
         # Download file
         file_path = cur_dir + '/' + filename
         urllib.urlretrieve(preview_url, file_path)
+
+        # Convert from mp3 to wav file
+        song = AudioSegment.from_mp3(file_path)
+        song.export(file_path, format="wav")
         songs_added += 1
         return file_path
     except Exception, e:
