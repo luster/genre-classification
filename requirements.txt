@@ -1,3 +1,4 @@
-pyechonest==8.0.1
 BeautifulSoup==3.2.1
+pydub==0.8.0
+pyechonest==8.0.1
 wsgiref==0.1.2
