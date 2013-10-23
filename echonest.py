@@ -63,8 +63,7 @@ def download_song(genre, song):
         songs_added += 1
         return file_path
     except Exception, e:
-        print "Could not Download File", e
-
+        logging.exception("Could not download file")
 
 # Stores information about song in Mongo
 def store_song(genre, song):
