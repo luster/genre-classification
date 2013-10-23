@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+# Information for running machine learning algorithm
+
+algorithm = {
+        "genres": ["rock", "jazz", "classical", "pop"], # Which genres to use
+        "training_size": 100, # How many songs to use for training each genre
+        "testing_size": 50 # How many songs to use for testing within each genre
+}
+
 # put API keys
 
 lastFm = {
