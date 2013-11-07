@@ -20,7 +20,7 @@ api_calls = 0
 songs_added = 0
 
 # Retrieves song preview, stores it in directory structure
-def download_song(genre, song):
+def download_song(genre, song, training=True):
     logger.debug('Downloading Song: %s' % song)
     global api_calls
     global songs_added
@@ -45,6 +45,12 @@ def download_song(genre, song):
         cur_dir = os.getcwd() + '/raw_audio'
         if not os.path.exists(cur_dir):
             os.makedirs(cur_dir)
+        if training:
+            cur_dir += '/training'
+        else:
+            cur_dir += '/testing'
+        if not os.path.exists(cur_dir):
+            os.makedirs(cur_dir)
         cur_dir += '/' + genre
         if not os.path.exists(cur_dir):
             os.makedirs(cur_dir)
@@ -66,8 +72,8 @@ def download_song(genre, song):
         logging.exception("Could not download file")
 
 # Stores information about song in Mongo
-def store_song(genre, song):
-    file_path = download_song(genre, song)
+def store_song(genre, song, training=True):
+    file_path = download_song(genre, song, training)
 
 def main():
     global songs_added
@@ -76,12 +82,24 @@ def main():
         logger.debug('Getting Playlist for Genre: %s' % genre)
         songs_added = 0
         genre_playlist = playlist.basic(type='genre-radio', genres=[genre], \
-                results=int(algorithm['training_size']*1.5), buckets=['id:7digital-US', 'tracks'])
+                results=int((algorithm['training_size']+algorithm['testing_size'])*2), buckets=['id:7digital-US', 'tracks'])
         for song in genre_playlist:
             if songs_added < algorithm['training_size']:
-                store_song(genre, song)
+                store_song(genre, song, True)
+            elif songs_added - algorithm['training_size'] < algorithm['testing_size']:
+                store_song(genre, song, False)
             else:
                 break
+        if songs_added < algorithm['training_size'] + algorithm['testing_size']:
+            genre_playlist = playlist.basic(type='genre-radio', genres=[genre], \
+                    results=int((algorithm['training_size']+algorithm['testing_size'])*2), buckets=['id:7digital-US', 'tracks'])
+            for song in genre_playlist:
+                if songs_added < algorithm['training_size']:
+                    store_song(genre, song, True)
+                elif songs_added - algorithm['training_size'] < algorithm['testing_size']:
+                    store_song(genre, song, False)
+                else:
+                    break
 
 if __name__ == '__main__':
     main()
