@@ -6,6 +6,7 @@ Quick Script Which Retrieves Data From Echonest for Use in the Machine Learning 
 from pyechonest import config, playlist
 from CONFIG import echonest, algorithm
 from pydub import AudioSegment
+from store import Store
 import hashlib
 import urllib
 import logging
@@ -15,6 +16,8 @@ import time
 config.ECHO_NEST_API_KEY = echonest['apiKey']
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+
+db = Store()
 
 api_calls = 0
 songs_added = 0
@@ -74,6 +77,14 @@ def download_song(genre, song, training=True):
 # Stores information about song in Mongo
 def store_song(genre, song, training=True):
     file_path = download_song(genre, song, training)
+    data = dict()
+    db.store_track(
+            song.title,
+            song.artist_name,
+            genre,
+            file_path,
+            song.id,
+            data)
 
 def main():
     global songs_added
