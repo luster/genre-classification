@@ -14,6 +14,9 @@ class Store(object):
         # define collection tables
         self.table = Store.db[table]
 
+    def get_all_tracks(self):
+        return self.table.find()
+
     def get_tracks_by_genre(self, genre):
         """Returns a list of tracks from a specific genre from the specified mongo table"""
         return self.table.find({"genre": genre.lower()})
@@ -38,3 +41,8 @@ class Store(object):
                 'data': data
                 }
         self.table.insert(post)
+
+    def store_mfcc(self, track_id, mfcc):
+        """Store track in database with specified title, artist, and extra data."""
+        self.table.update({'_id': track_id}, {'$set': {'mfcc_tot': mfcc}})
+

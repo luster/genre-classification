@@ -77,14 +77,15 @@ def download_song(genre, song, training=True):
 # Stores information about song in Mongo
 def store_song(genre, song, training=True):
     file_path = download_song(genre, song, training)
-    data = dict()
-    db.store_track(
-            song.title,
-            song.artist_name,
-            genre,
-            file_path,
-            song.id,
-            data)
+    if file_path:
+        data = dict()
+        db.store_track(
+                song.title,
+                song.artist_name,
+                genre,
+                file_path,
+                song.id,
+                data)
 
 def main():
     global songs_added

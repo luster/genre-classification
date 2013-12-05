@@ -3,6 +3,7 @@
 ###############################################################################
 #   Module for MFCC extraction
 #   By Maigo Yun Wang, 02/08/2012
+#   Modified By Robert Gruener 12/2/2013
 ###############################################################################
 #   Quick tutorial:
 #       import MFCC
@@ -56,10 +57,10 @@ def melfb(p, n, fs):
     M = zeros((p, 1+fn2))
     for c in range(b2-1,b4):
         r = fp[c] - 1
-        M[r,c+1] += 2 * (1 - pm[c])
+        M[int(r),c+1] += 2 * (1 - pm[c])
     for c in range(b3):
         r = fp[c]
-        M[r,c+1] += 2 * pm[c]
+        M[int(r),c+1] += 2 * pm[c]
     return M, CF
 
 def dctmtx(n):
@@ -80,16 +81,25 @@ WINDOW = hamming(FRAME_LEN)             # Window function
 PRE_EMPH = 0.95                         # Pre-emphasis factor
 
 BANDS = 40                              # Number of Mel filters
-COEFS = 13                              # Number of Mel cepstra coefficients to keep
+COEFS = 20                              # Number of Mel cepstra coefficients to keep
 POWER_SPECTRUM_FLOOR = 1e-100           # Flooring for the power to avoid log(0)
 M, CF = melfb(BANDS, FFT_SIZE, FS)      # The Mel filterbank matrix and the center frequencies of each band
 D = dctmtx(BANDS)[1:COEFS+1]            # The DCT matrix. Change the index to [0:COEFS] if you want to keep the 0-th coefficient
 invD = inv(dctmtx(BANDS))[:,1:COEFS+1]  # The inverse DCT matrix. Change the index to [0:COEFS] if you want to keep the 0-th coefficient
 
-def extract(x, show = False):
+def extract(x, sample_rate, show = False):
     """
     Extract MFCC coefficients of the sound x in numpy array format.
     """
+
+    global FS, FRAME_LEN, FRAME_SHIFT, WINDOW, M, CF
+    if sample_rate != FS:
+        FS = sample_rate                        # Sampling rate
+        FRAME_LEN = int(.02 * FS)              # Frame length
+        FRAME_SHIFT = int(.01 * FS)            # Frame shift
+        WINDOW = hamming(FRAME_LEN)             # Window function
+        M, CF = melfb(BANDS, FFT_SIZE, FS)      # The Mel filterbank matrix and the center frequencies of each band
+
     if x.ndim > 1:
         print "INFO: Input signal has more than 1 channel; the channels will be averaged."
         x = mean(x, axis=1)
