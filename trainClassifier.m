@@ -25,9 +25,9 @@ ds = ds.setClassNames(classNames);
 ds.data = features;
 ds.targets = labels;
 
-zmuv = prtPreProcZmuv;
-zmuv = zmuv.train(ds);
-ds = zmuv.run(ds);
+% zmuv = prtPreProcZmuv;
+% zmuv = zmuv.train(ds);
+% ds = zmuv.run(ds);
 
 classifier = prtClassMatlabTreeBagger;
 % classifier = prtClassBinaryToMaryOneVsAll;
