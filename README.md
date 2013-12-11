@@ -26,9 +26,8 @@ rastamat (http://labrosa.ee.columbia.edu/matlab/rastamat/)
 ## Example Usage
 
 1. Rename `SAMPLE_CONFIG` to `CONFIG.py` and add your echonest API key data.
-2. `./echonest.py` to collect training and testing data
+2. `python echonest.py` to collect training and testing data
 3. Open MATLAB and run `butRunThisScriptDoe.m` to load the data into MATLAB and train and test the classifier.
-4. To save the data to a .mat file for quicker loading, execute `save('data.mat','trainData','testData')`.
-5. Modify the feature collection in `loadData.m` if desired.
-6. Test classifier on single files in MATLAB using `testFile.m`.
-7. Run the Flask development server using `./runApp.py`.
+4. Modify the feature collection in `loadData.m` if desired.
+5. Test classifier on single files in MATLAB using `testFile.m`.
+6. Run the Flask development server using `python runApp.py`.
