@@ -1,4 +1,4 @@
-clear all
+%clear all
 close all
 clc
 
@@ -14,11 +14,10 @@ load matlab/data.mat
 trainData = addCovFeature(trainData);
 testData = addCovFeature(testData);
 
-classifier = trainClassifier(trainData);
+[classifier,tawf] = trainClassifier(trainData);
 [classified,ds] = testClassifier(testData,classifier);
 
-% [~,guess] = max(classified.data,[],2);
-% prtScoreConfusionMatrix(classified,ds);
+prtScoreConfusionMatrix(classified,ds);
 
 % confMat = prtScoreConfusionMatrix(guess,classified.targets)
 % percent = sum(diag(confMat)/sum(confMat(:)))

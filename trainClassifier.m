@@ -1,4 +1,4 @@
-function classifier = trainClassifier(g)
+function [classifier, ds]  = trainClassifier(g)
 % accepts struct g with fields
 %   name - genre
 %   files - struct of files with feature data
@@ -31,8 +31,13 @@ ds.targets = labels;
 
 classifier = prtClassMatlabTreeBagger;
 % classifier = prtClassBinaryToMaryOneVsAll;
-% classifier.baseClassifier = prtClass;
-% classifier.internalDecider = prtDecisionMap;
+
+% baseClassifier = prtClassRvm;
+% baseClassifier.kernels.kernelCell{2}.sigma = 10;
+
+% classifier.baseClassifier = baseClassifier;
+% classifier.baseClassifier = prtClassLibSvm;
+classifier.internalDecider = prtDecisionMap;
 classifier = classifier.train(ds);
 
 end
