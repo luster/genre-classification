@@ -76,6 +76,8 @@ def download_song(genre, song, training=True):
 
 # Stores information about song in Mongo
 def store_song(genre, song, training=True):
+    if db.get_track(song.title, song.artist_name):
+        return
     file_path = download_song(genre, song, training)
     if file_path:
         data = dict()
