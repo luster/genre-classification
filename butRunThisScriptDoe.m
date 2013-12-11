@@ -1,4 +1,4 @@
-clear all
+%clear all
 close all
 clc
 
@@ -14,7 +14,7 @@ load matlab/data.mat
 trainData = addCovFeature(trainData);
 testData = addCovFeature(testData);
 
-classifier = trainClassifier(trainData);
+[classifier,tawf] = trainClassifier(trainData);
 [classified,ds] = testClassifier(testData,classifier);
 
 prtScoreConfusionMatrix(classified,ds);

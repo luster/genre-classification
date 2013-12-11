@@ -5,6 +5,7 @@ for ii=1:length(g)
     for jj=1:nFiles
         datMat = cov(g(ii).files(jj).ceps);
         newFeat = [g(ii).files(jj).features, datMat(:)'];
+        % newFeat = datMat(:)';
         g(ii).files(jj).features = newFeat;
     end
 end
