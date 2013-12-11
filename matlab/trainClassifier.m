@@ -29,10 +29,10 @@ zmuv = prtPreProcZmuv;
 zmuv = zmuv.train(ds);
 ds = zmuv.run(ds);
 
-% classifier = prtClassMatlabTreeBagger;
-classifier = prtClassBinaryToMaryOneVsAll;
-classifier.baseClassifier = prtClassLibSvm;
-classifier.internalDecider = prtDecisionMap;
+classifier = prtClassMatlabTreeBagger;
+% classifier = prtClassBinaryToMaryOneVsAll;
+% classifier.baseClassifier = prtClass;
+% classifier.internalDecider = prtDecisionMap;
 classifier = classifier.train(ds);
 
 end

@@ -1,4 +1,4 @@
-function classified = testClassifier(g, classifier)
+function [classified,ds] = testClassifier(g, classifier)
 % g is a struct with name and files fields
 % classifier is a trained classifier
 
