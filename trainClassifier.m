@@ -32,7 +32,7 @@ ds.targets = labels;
 classifier = prtClassMatlabTreeBagger;
 % classifier = prtClassBinaryToMaryOneVsAll;
 % classifier.baseClassifier = prtClass;
-% classifier.internalDecider = prtDecisionMap;
+classifier.internalDecider = prtDecisionMap;
 classifier = classifier.train(ds);
 
 end

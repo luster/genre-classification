@@ -17,8 +17,7 @@ testData = addCovFeature(testData);
 classifier = trainClassifier(trainData);
 [classified,ds] = testClassifier(testData,classifier);
 
-% [~,guess] = max(classified.data,[],2);
-% prtScoreConfusionMatrix(classified,ds);
+prtScoreConfusionMatrix(classified,ds);
 
 % confMat = prtScoreConfusionMatrix(guess,classified.targets)
 % percent = sum(diag(confMat)/sum(confMat(:)))
