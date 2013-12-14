@@ -38,6 +38,9 @@ classifier.nTrees = 2000;
 % classifier = prtClassBinaryToMaryOneVsAll;
 
 % baseClassifier = prtClassNnet;
+% classifier = prtClassBinaryToMaryOneVsAll;
+% classifier.baseClassifier = prtClassAdaBoost;
+% baseClassifier = prtClassRvm;
 % baseClassifier.kernels.kernelCell{2}.sigma = 10;
 
 % classifier.baseClassifier = baseClassifier;

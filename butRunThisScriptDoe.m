@@ -1,4 +1,4 @@
-clear all
+% clear all
 close all
 clc
 
@@ -19,7 +19,7 @@ testData = addCovFeature(testData);
 [classifier,tawf] = trainClassifier(trainData);
 [classified,ds] = testClassifier(testData,classifier);
 
-prtScoreConfusionMatrix(classified,ds);
+prtScoreConfusionMatrix(classified,ds)
 
 % confMat = prtScoreConfusionMatrix(guess,classified.targets)
 % percent = sum(diag(confMat)/sum(confMat(:)))
