@@ -1,4 +1,4 @@
-function [classified,ds] = testFile(filename, trained_classifier)
+function [classified] = testFile(filename, trained_classifier)
 % given a filename and a trained classifier, returnes classified object
 
 addpath('rastamat/');

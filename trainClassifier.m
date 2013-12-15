@@ -16,8 +16,11 @@ for ii=1:nGenre
     nFiles = length(g(ii).files);
     classNames{ii} = {ii-1,g(ii).name};
     for jj=1:nFiles
-        features = [features; g(ii).files(jj).features];
-        labels = [labels; ii-1];
+        newFeat = g(ii).files(jj).features;
+        if ~any(isnan(newFeat) | isinf(newFeat))
+            features = [features; newFeat];
+            labels = [labels; ii-1];
+        end
     end
 end
 
@@ -30,8 +33,13 @@ ds.targets = labels;
 % ds = zmuv.run(ds);
 
 classifier = prtClassMatlabTreeBagger;
+classifier.nTrees = 2000;
+% classifier.nTrees = 1000;
 % classifier = prtClassBinaryToMaryOneVsAll;
 
+% baseClassifier = prtClassNnet;
+% classifier = prtClassBinaryToMaryOneVsAll;
+% classifier.baseClassifier = prtClassAdaBoost;
 % baseClassifier = prtClassRvm;
 % baseClassifier.kernels.kernelCell{2}.sigma = 10;
 
