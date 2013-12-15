@@ -3,7 +3,10 @@ function g = loadData(train_or_test)
 
 addpath('rastamat/');
 path_to_train_data = dir(train_or_test);
-numGenres = 4;
+ii = [path_to_train_data(:).isdir];
+genres = {path_to_train_data(ii).name}';
+genres(ismember(genres,{'.','..'})) = [];
+numGenres = length(genres);
 g = struct;
 
 for ii=1:numGenres
@@ -25,7 +28,7 @@ for ii=1:numGenres
             g(ii).files(jj-2).ceps = ceps;
             g(ii).files(jj-2).features = cep_feat;
         catch
-            fprintf('Likely Corrupted File found at %s. Please delete it.', sstr);
+            fprintf('Likely Corrupted File found at %s. Please delete it before re-running script\n', sstr);
         end
     end
 end
