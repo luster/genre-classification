@@ -1,4 +1,4 @@
-function [classifier, ds]  = trainClassifier(g)
+function [classifier, ds]  = trainClassifier(g, classifier)
 % accepts struct g with fields
 %   name - genre
 %   files - struct of files with feature data
@@ -32,20 +32,6 @@ ds.targets = labels;
 % zmuv = zmuv.train(ds);
 % ds = zmuv.run(ds);
 
-classifier = prtClassMatlabTreeBagger;
-classifier.nTrees = 2000;
-% classifier.nTrees = 1000;
-% classifier = prtClassBinaryToMaryOneVsAll;
-
-% baseClassifier = prtClassNnet;
-% classifier = prtClassBinaryToMaryOneVsAll;
-% classifier.baseClassifier = prtClassAdaBoost;
-% baseClassifier = prtClassRvm;
-% baseClassifier.kernels.kernelCell{2}.sigma = 10;
-
-% classifier.baseClassifier = baseClassifier;
-% classifier.baseClassifier = prtClassLibSvm;
-classifier.internalDecider = prtDecisionMap;
 classifier = classifier.train(ds);
 
 end
