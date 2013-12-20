@@ -12,9 +12,7 @@ This project collects and uses 30-second preview, genre-labeled raw audio data f
 ```
 pydub
 pyechonest
-flask
 numpy
-mlabwrap (http://mlabwrap.sourceforge.net/)
 ```
 
 ### MATLAB
